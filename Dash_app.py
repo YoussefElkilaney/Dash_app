@@ -12,8 +12,8 @@ import pandas as pd
 import numpy as np
 from datetime import date
 
-confirmed = pd.read_csv('./time_series_covid19_confirmed_global.csv')
-deaths = pd.read_csv('./time_series_covid19_deaths_global.csv')
+confirmed = pd.read_csv('https://raw.githubusercontent.com/YoussefElkilaney/Dash_app/main/time_series_covid19_confirmed_global.csv')
+deaths = pd.read_csv('https://raw.githubusercontent.com/YoussefElkilaney/Dash_app/main/time_series_covid19_deaths_global.csv')
 
 countries = deaths.apply(lambda x:f'{x[1]}{"" if pd.isna(x[0]) else ", "+x[0]}', axis=1)
 
