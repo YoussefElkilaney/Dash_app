@@ -159,12 +159,13 @@ def updateGraph1_1(ctry, choices):
         selector = 0
         
         if len(c) > 20:
-            c = '..' + ', '.join(c.split(',')[1:])[:20]
-            
+            c_ = '..' + ', '.join(c.split(',')[1:])[:20]
+        else: c_ = c
+
         if 'C' in choices:
             fig.add_trace(go.Scatter(x=ctry_df.index,
                                      y=ctry_df['confirmed'],
-                                     name=f'{c}, confirmed',
+                                     name=f'{c_}, confirmed',
                                      mode='lines+markers',
                                      marker_symbol='circle')
                          )
@@ -174,7 +175,7 @@ def updateGraph1_1(ctry, choices):
         if 'D' in choices:
             fig.add_trace(go.Scatter(x=ctry_df.index,
                                      y=ctry_df['deaths'],
-                                     name=f'{c}, deaths',
+                                     name=f'{c_}, deaths',
                                      mode='lines+markers',
                                      marker_symbol='square')
                          )
@@ -201,13 +202,14 @@ def updateGraph1_2(ctry, choices):
         selector = 0
 
         if len(c) > 20:
-            c = '..' + ', '.join(c.split(',')[1:])[:20]
+            c_ = '..' + ', '.join(c.split(',')[1:])[:20]
+        else: c_ = c
 
         if 'C' in choices:
             ctry_df = list(coronadf.loc[:,(c,'confirmed')].groupby([coronadf.index.year, coronadf.index.month]).sum())
             fig.add_trace(go.Bar(x=months,
                                      y=ctry_df,
-                                     name=f'{c}, confirmed',
+                                     name=f'{c_}, confirmed',
                                 )
                          )
     #             fig.update_traces(selector=selector, 'style':''); #line={'color':"#f55"}
@@ -217,7 +219,7 @@ def updateGraph1_2(ctry, choices):
             ctry_df = list(coronadf.loc[:,(c,'deaths')].groupby([coronadf.index.year, coronadf.index.month]).sum())
             fig.add_trace(go.Bar(x=months,
                                      y=ctry_df,
-                                     name=f'{c}, deaths',
+                                     name=f'{c_}, deaths',
                                 )
                          )
     #             fig.update_traces(selector=selector, line={'color':"#bbb"});
